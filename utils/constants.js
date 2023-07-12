@@ -1,0 +1,1 @@
+exports.ES_PRODUCTS_INDEX = "products";
