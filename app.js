@@ -14,6 +14,7 @@ const Products = require("./models/products-model");
 // routes
 const baseRoutes = require("./routes/base-route");
 const productRoutes = require("./routes/products-routes");
+const path = require("path");
 const app = express();
 
 // create a write stream (in append mode)
@@ -26,6 +27,12 @@ var accessLogStream = fs.createWriteStream(
 
 app.use(express.json());
 app.use(morgan("combined", { stream: accessLogStream }));
+app.use(express.static(path.join(__dirname,"ui-build")));
+// Handle requests to the base path
+app.get('/', (req, res) => {
+  res.sendFile(path.join(__dirname, 'ui-build', 'index.html'));
+});
+
 app.use(
   cors({
     origin: true,
@@ -41,7 +48,7 @@ app.options(
     credentials: true,
   })
 );
-app.use(baseRoutes);
+// app.use(baseRoutes);
 app.use("/products", productRoutes);
 sequelize
   .sync({ alter: true })
