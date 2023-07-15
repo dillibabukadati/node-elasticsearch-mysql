@@ -24,7 +24,7 @@ ES_API_KEY=""
 
 ## Once you are done with that, start the backend by running the following command.
 ````
-npm start
+node app.js
 ````
 It may take few moments to load the project, that is because it will start uploading nearly 1Lakh products to MySQL and Elastic Search.
 
